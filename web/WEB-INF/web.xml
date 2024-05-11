@@ -12,9 +12,17 @@
             <param-value>30</param-value>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>Servlet3</servlet-name>
+        <servlet-class>servlets.Servlet3</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet1</servlet-name>
         <url-pattern>/Servlet1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet3</servlet-name>
+        <url-pattern>/Servlet3</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -23,7 +31,9 @@
     </session-config>
     <context-param>
         <param-name>parametroContexto</param-name>
-        <param-value>"valorDeParametro"</param-value>  
+        <param-value>"valorDeParametro"</param-value>
     </context-param>
-      
+    <param-name/>
+    <param-value/>
+    <param-name/>
 </web-app>

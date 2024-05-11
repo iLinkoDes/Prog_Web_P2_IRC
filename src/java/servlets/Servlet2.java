@@ -6,8 +6,9 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +17,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author iLeLi
  */
-public class Servlet1 extends HttpServlet {
+@WebServlet(name = "Servlet2", urlPatterns = {"/Servlet2"}, initParams = {
+    @WebInitParam(name = "emailTest", value = "ian.r@ipn.mx"),
+    @WebInitParam(name = "param2", value = "15")})
+public class Servlet2 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,12 +33,27 @@ public class Servlet1 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         
         getServletContext()
-                .getRequestDispatcher("/Servlet2")
-                .forward(request, response);
+                .getRequestDispatcher("/Servlet3")
+                .include(request, response);
         
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Servlet2</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Respuesta de Servlet2</h1>");
+            if(request.getAttribute("random") != null){
+                out.println("<p>Numero aleatorio de Servlet3 <br/><h3>"+request.getAttribute("random")+"</h3></p>");
+            }
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
